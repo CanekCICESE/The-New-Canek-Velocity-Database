@@ -5,10 +5,17 @@
 
 clear all; close all; clc;
 
-% path to the souce NetCDF
-raiz = 'C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\Data\';
 
-arch = [raiz, 'New_Canek_Database_2024.nc'];
+% put your path to the main folder
+yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
+
+% add the external fncs folder to the path:
+addpath(genpath([yourPath, '/extrn']));
+
+% path to the souce NetCDF
+origin = [yourPath, 'Data/'];
+
+arch = [origin, 'New_Canek_Database_2024.nc'];
 
 tid =ncread(arch, 'time'); % read the time vector 
 
