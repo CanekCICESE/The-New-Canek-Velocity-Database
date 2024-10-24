@@ -1,6 +1,6 @@
 % Used to create the results on the transport time series analysis show in
 % the subsection 3a, Figure 5.
-%
+% This is also an example code on how to read the main database Netcdf
 % G. Durante, 2024
 clear all; close all; clc;
 
