@@ -14,7 +14,7 @@ yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
 addpath(genpath([yourPath, '/extrn']));
 
 % path to the files
-origin = [yourPath, '/Data/BackgroundSections/'];
+origin = [yourPath, 'Data/BackgroundSections/'];
 % ===============================================================
 
 close all
