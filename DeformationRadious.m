@@ -4,17 +4,17 @@
 
 clear all; clc; close all;
 
-
-% path to the file
+% path to the main folder
 yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
 
+% add the external fncs folder to the path:
 addpath(genpath([yourPath, '\extrn']));
 
+% path to the main files
 origin = [yourPath, '/Data/CTD/'];
 
 % load the CTD data
 load([origin, 'CTD_cnk_Hist.mat'])
-
 
 
 Ro = [];
@@ -45,6 +45,7 @@ for i = 1 : ncasts
         
     % interpolate every cast, just in case is not at the same vertical resolution   
     % normally do
+    % compute N^2
     [N2, p_m] = gsw_Nsquared(sdu, tdu, pdu, ladu);
     N2(N2<0) = 0;
     N = sqrt(N2)*2*pi;
