@@ -8,7 +8,7 @@ clear all; clc; close all;
 yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
 
 % add the external fncs folder to the path:
-addpath(genpath([yourPath, '\extrn']));
+addpath(genpath([yourPath, '/extrn']));
 
 % path to the main files
 origin = [yourPath, '/Data/CTD/'];
