@@ -1,10 +1,21 @@
 % Estimations of the first baroclinic radious of deformation following (Chelton et al., 1998)
-%
+% This code uses the function gsw_Nsquared.m TESO-10 library 
+% you can download the library from: https://www.teos-10.org/software/gsw_matlab_v3_06_16.zip
+
 clear all; clc; close all;
 
-load C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\Data\CTD\CTD_cnk_Hist.mat
 
-addpath(genpath('C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\extrn'))
+% path to the file
+yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
+
+addpath(genpath([yourPath, '\extrn']));
+
+origin = [yourPath, '/Data/CTD/'];
+
+% load the CTD data
+load([origin, 'CTD_cnk_Hist.mat'])
+
+
 
 Ro = [];
 lat = [];
