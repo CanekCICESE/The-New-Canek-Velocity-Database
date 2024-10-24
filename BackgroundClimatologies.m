@@ -24,7 +24,7 @@ colormap(jet(40))
 
 % Mapping the climatology from the Yucatan section
 % load the cell-averages from the Yucatan section
-load([origin, '\yuc_vel_clim_clean.mat']);
+load([origin, '/yuc_vel_clim_clean.mat']);
 
 % make the scatter plot with the normal-to-the-section velocity as color
 subplot(2, 2, 1)
@@ -70,7 +70,7 @@ xlabel('Longitude', 'interpreter','latex')
 
 % Mapping the climatology from the Florida section
 % load the cell-averages from the Yucatan section
-load([origin, '\flo_vel_clim_clean.mat']);
+load([origin, '/flo_vel_clim_clean.mat']);
 
 % make the scatter plot with the normal-to-the-section velocity as color
 subplot(2, 2, 2)
