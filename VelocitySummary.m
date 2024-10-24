@@ -7,7 +7,7 @@ clear all; close all; clc;
 % path to the souce NetCDF
 raiz = 'C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\Data\';
 
-arch = [raiz, 'New_Canek_Database_2024_.nc'];
+arch = [raiz, 'New_Canek_Database_2024.nc'];
 
 tid =ncread(arch, 'time'); % read the time vector
 lon =ncread(arch, 'ylon'); % read the time longitude
