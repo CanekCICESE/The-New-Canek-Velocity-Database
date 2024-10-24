@@ -1,13 +1,20 @@
 % Example of the observational noise std estimation
-
+% this code uses the  function mspec from  the Jlab library:
+% You can download the Jlab from: https://jmlilly.net/code.html or https://github.com/jonathanlilly/jLab
 
 close all; clc; clear all;
+
+% path to the file
+yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
+origin = [yourPath, '/Data/BackgroundNoiseSTD/'];
+
 seccion = 'Yucatan';
 % seccion = 'Florida';
 
 flag = lower(seccion);
 flag = flag(1:3);
 
+% possible moorings
 switch seccion
     case 'Yucatan'
         ancla = {'YUC1', 'YUC2', 'YUC3', 'YUC4', 'YUC5', ...
@@ -18,20 +25,16 @@ switch seccion
         ancla = {'EFL1', 'EFL2', 'EFL3', 'EFL4', 'EFL5', 'EFLI5', 'EFL6', 'EFL7'};
 end
 
-clc
-
 % canek campaigns
 CNK = [26,  29,  34, 37,  39,	42,  48];
 
-
-origen = 'C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\Data\BackgroundNoiseSTD\';
 
 an = 9; % mooring, for this example is YUC7
 kk = 3; % canek campaign, for this exam,ple is CNK34
 cnk = num2str(CNK(kk));
 
 anc = ['CNK', cnk, '_', char(ancla(an))];
-load([origen, anc])
+load([origin, anc])
 
 cou = 1;
 % anchor is an array of structures. hence, the i-est element of anchor: 'anchor(i)'
@@ -84,10 +87,9 @@ if exist('anchor') && ~isempty(fieldnames(anchor))
 
             [f,spp]=mspec(1,cv,psi,'cyclic'); % we use Jlab fncs to compute the power spectral density estimation
             df = mean(diff(f));
+            %Compute the power spectral density estimation:
             [fd,sppd]=mspec(1/24,cv,psi,'cyclic');
 
-
-            % [var(cv),  abs(trapz(spp, f)*2)]
             xo = flipud(f(:));
             xf = flipud(fd(:));
             ps = flipud(spp(:));
@@ -102,26 +104,30 @@ if exist('anchor') && ~isempty(fieldnames(anchor))
             psf = psf./max(psf);
             xff = (xf);
 
-
+            % fit a general gaussian curve
             fi = fittype('a*(exp((x.^2).*b)) + c');
             [fite,gof,fitinfo] = fit(xff, psf, fi, 'StartPoint',[1, 0, 0]);
             fua = feval(fite, xf);
             L = coeffvalues(fite);
-            d = L(3);
+            d = L(3); % vertical shift part
 
-            thresh = 0.02;
+            thresh = 0.02; % threshold to look for the flat part
             ini = find(fua-d <= thresh );
 
+
+            % Using the trapezoidal integration to find the variance
+            % estimated noise variance integrating the flat part
             std_noise(cou) = sqrt(abs(trapz(ps(ini), xo(ini))));
             inis = (fua-d <= thresh );
+            
+            % estimated signal variance total - noise variance
             var_to_noise(cou) = ( (abs(trapz(ps(ini), xo(ini)))))/ (var(cv) - (abs(trapz(ps(ini), xo(ini)))));
 
-
+            % for graphic porpuses =========================================================================
             psf = ps(li);
             xff = xo(li);
-
             sill = max(psf);
-
+            
             % fit a general gaussian curve
             fi = fittype('a*(exp((x.^2).*b)) + c');
             [fite,gof,fitinfo] = fit(xff, psf./sill, fi, 'StartPoint',[max(psf), 0, 0]);
