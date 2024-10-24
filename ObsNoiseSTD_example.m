@@ -4,9 +4,14 @@
 
 close all; clc; clear all;
 
-% path to the file
+% path to the main folder
 yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
-origin = [yourPath, '/Data/BackgroundNoiseSTD/'];
+
+% add the external fncs folder to the path:
+addpath(genpath([yourPath, '/extrn']));
+
+% path to the files
+origin = [yourPath, 'Data/BackgroundNoiseSTD/'];
 
 seccion = 'Yucatan';
 % seccion = 'Florida';
@@ -34,6 +39,8 @@ kk = 3; % canek campaign, for this exam,ple is CNK34
 cnk = num2str(CNK(kk));
 
 anc = ['CNK', cnk, '_', char(ancla(an))];
+
+% load the raw data from a given mooring, in this case YUC7 from CNK34
 load([origin, anc])
 
 cou = 1;
