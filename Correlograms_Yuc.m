@@ -2,10 +2,16 @@
 % the subsection 2c, Figure 3.
 %
 % G. Durante, 2024
+
 clear; close all; clc;
 
 % path to the main folder of the repository
-raiz = 'C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\';
+yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
+
+% add the external fncs folder to the path:
+addpath(genpath([yourPath, '/extrn']));
+
+% path to the main files
 
 CNKi = [29  34	37  39	42  48]; % canek campaigns (2012-2020)
 filtra = 0;
@@ -21,8 +27,7 @@ flag = 'yuc';
 
 for ll = 1 : length(CNKi)
 
-    load(...
-        [raiz, 'Data\CampaignAverages\',...
+    load([yourPath, 'Data\CampaignAverages\',...
         'Clim_yuc_vel_', num2str( CNKi(ll) ), '_raw'])
 
     yp = getCanekSCoor(flag, xp); % obtain the latitudes of the observations
