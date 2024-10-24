@@ -22,12 +22,11 @@ id = [];
 flag = 'yuc';
 
 
-
 %% Compute horizontal correlogram
 
 for ll = 1 : length(CNKi)
 
-    load([yourPath, 'Data\CampaignAverages\',...
+    load([yourPath, '/Data/CampaignAverages/',...
         'Clim_yuc_vel_', num2str( CNKi(ll) ), '_raw'])
 
     yp = getCanekSCoor(flag, xp); % obtain the latitudes of the observations
@@ -198,7 +197,6 @@ for ll = 1 : length(CNKi)
     hs = [hs(:); hdist(:)]; % distances
     %=======================================================
 end
-
 
 set (findobj (gcf, '-property', 'interpreter'), 'interpreter','latex')
 set (findobj (gcf, '-property', 'ticklabelinterpreter'), 'ticklabelinterpreter','latex')
