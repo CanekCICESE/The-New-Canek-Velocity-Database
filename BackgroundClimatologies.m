@@ -1,14 +1,20 @@
-% 2023 no casos si no caso shilo el 76 para florida
+% Plot the background climatological sections from the Canek transects
 clear all; close all; clc
 %
-% Grid resolution
+% Grid resolution (verticla [m] and horizontal [degrees])
 vres = 20; hres = 0.03;
 % interpolation parameters for both sections
 params_climy = [75000, 900, 0.01];
 params_climf = [90000, 900, 0.01];
 
-% path to the data
-raiz = 'C:\Users\nucle\Tesis\Papers\Paper_I\Figures\Programas\CreaRepos\Data\BackgroundSections\';
+% put your path to the main folder
+yourPath = 'C:/Users/nucle/Tesis/Papers/Paper_I/Figures/Programas/CreaRepos/';
+
+% add the external fncs folder to the path:
+addpath(genpath([yourPath, '/extrn']));
+
+% path to the files
+origin = [yourPath, '/Data/BackgroundSections/'];
 % ===============================================================
 
 close all
@@ -17,15 +23,15 @@ colormap(jet(40))
 
 
 % Mapping the climatology from the Yucatan section
-
-load([raiz, '\yuc_vel_clim_clean.mat']);
+% load the cell-averages from the Yucatan section
+load([origin, '\yuc_vel_clim_clean.mat']);
 
 % make the scatter plot with the normal-to-the-section velocity as color
 subplot(2, 2, 1)
 box on;
 scatter( Nxp(:),Nzp(:), 15,Nvp(:), 'filled' );
 hold on;
-clim([-0.1, 1.2]);
+caxis([-0.1, 1.2]);
 set(gca, 'XtickLabels', {})
 ylabel('Depth (m)', 'interpreter','latex')
 set(gca, 'FontSize', 11);
@@ -53,7 +59,7 @@ pcolor(Xy, Zy, Uy); shading interp
 hold on;
 [cony, hhy]= contour(Xy, Zy, Uy, [1, 0.9, 0.7, 0.5, 0.3, 0.1, -0.05, 0, -0.1, -0.2], 'k');
 clabel(cony, hhy, 'fontsize', 8)
-clim([-0.1, 1.2]);
+caxis([-0.1, 1.2]);
 ylabel('Depth (m)', 'interpreter','latex')
 set(gca, 'FontSize', 11);
 batsec('yuc', gca, 'k', 2);
@@ -63,8 +69,8 @@ xlabel('Longitude', 'interpreter','latex')
 %==============================================================
 
 % Mapping the climatology from the Florida section
-
-load([raiz, '\flo_vel_clim_clean.mat']);
+% load the cell-averages from the Yucatan section
+load([origin, '\flo_vel_clim_clean.mat']);
 
 % make the scatter plot with the normal-to-the-section velocity as color
 subplot(2, 2, 2)
@@ -74,7 +80,7 @@ hold on;
 set(gca, 'XtickLabels', {}, 'YtickLabels', {})
 batsec('flo', gca, 'k', 2);
 axis([23.1, 24.67, -2100, 100]);
-clim([-0.1, 1.2]);
+caxis([-0.1, 1.2]);
 set(gca, 'FontSize', 11);
 
 
@@ -101,7 +107,7 @@ hold on;
 clabel(cony, hhy, 'fontsize', 8)
 batsec('flo', gca, 'k', 2);
 axis([23.1, 24.67, -2100, 100]);
-clim([-0.1, 1.2]);
+caxis([-0.1, 1.2]);
 set(gca, 'YtickLabels', {})
 
 
